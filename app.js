@@ -19,7 +19,8 @@ class GroceryListItem extends React.Component {
         super(props);
    
         this.state = {
-            done: false
+            done: false,
+            hover: false
         };
     }
 
@@ -30,13 +31,20 @@ class GroceryListItem extends React.Component {
         });
     }
 
+    onListItemHover() {
+        this.setState({
+            hover: !this.state.hover
+        })
+    }
+
     render() {
-        var style = {
-            textDecoration: this.state.done ? 'line-through' : 'none'
+        let style = {
+            textDecoration: this.state.done ? 'line-through' : 'none',
+            fontWeight: this.state.hover ? 'bold' : 'normal'
           };
 
         return (
-            <li style={style} onClick={this.onListItemClick.bind(this)}>{this.props.item}</li>
+            <li style={style} onClick={this.onListItemClick.bind(this)} onMouseOver={this.onListItemHover.bind(this)} onMouseOut={this.onListItemHover.bind(this)}>{this.props.item}</li>
         );
     }
 } 
