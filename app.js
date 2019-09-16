@@ -1,24 +1,29 @@
 // TODO
-const App = () => (
+const App = (props) => (
     <div>
         <h1>My Grocery List</h1>
-        <GroceryListItem groceryItems={[<Cucumbers />, <Kale />]}/>
+        <GroceryList groceryItems={['Cucumber', 'Kale']}/>
     </div>
 );
 
-const GroceryListItem = (props) => (
+const GroceryList = (props) => (
     <ul>
-        {props.groceryItems[0]}
-        {props.groceryItems[1]}
+        {props.groceryItems.map(item =>
+            <GroceryListItem item={item} />
+            )}
     </ul>
 );
 
-const Cucumbers = () => (
-    <li>Cucumbers</li>
-);
+class GroceryListItem extends React.Component {
+    constructor(props) {
+        super(props);
+    }
 
-const Kale = () => (
-    <li>Kale</li>
-);
+    render() {
+        return (
+            <li>{this.props.item}</li>
+        );
+    }
+} 
 
 ReactDOM.render(<App />, document.getElementById("app"));
